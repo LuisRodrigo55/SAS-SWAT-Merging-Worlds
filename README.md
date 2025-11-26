@@ -31,5 +31,4 @@ You must note that SWAT is new technology and it wont woork with SAS 9.4, it use
 
 Server Dependency: It requires access to a running SAS Viya / CAS server.
 Version Compatibility: You generally need a client SWAT version that matches or is compatible with the server's CAS version.
-Authentication: Requires valid credentials (LDAP, Kerberos, or Azure AD depending on setup).
-
+Authentication: Requires valid credentials username/password, SAML, or other methods depending on your SAS deployment (LDAP, Kerberos, or Azure AD depending on setup).
