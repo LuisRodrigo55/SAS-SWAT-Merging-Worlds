@@ -1,0 +1,52 @@
+Here is example of how SWAT works:
+
+# Python Workflow Example
+
+```python
+import pandas as pd
+from swat import CAS
+
+# 1. Connect to CAS (SAS Viya)
+# Replace with your actual host, port, and credentials
+conn = CAS('my-cas-host.example.com', 5570, 'username', 'password')
+
+# 2. Upload Data
+# Uploads a local pandas DataFrame to distributed CAS memory
+df = pd.DataFrame({'Category': ['A', 'B', 'A', 'C'], 'Value': [10, 20, 30, 40]})
+conn.upload_frame(df, casout={'name': 'my_data', 'replace': True})
+
+# 3. Execute Analytics on Server
+# This runs the 'summary' action on the SAS server
+result = conn.simple.summary(table='my_data')
+
+# 4. Retrieve Results
+# Bring the specific result table back to Python as a DataFrame
+summary_df = result['Summary']
+print(summary_df)
+
+# 5. Close Connection
+conn.close()
+```
+
+
+# R Workflow Example
+
+```r
+library(swat)
+
+# 1. Connect to CAS
+conn <- CAS("my-cas-host.example.com", 5570, "username", "password")
+
+# 2. Upload Data
+df <- data.frame(Category = c('A', 'B', 'A'), Value = c(10, 20, 30))
+cas.write.table(conn, df, casout = list(name="my_data", replace=TRUE))
+
+# 3. Execute Analytics on Server
+result <- cas.simple.summary(conn, table="my_data")
+
+# 4. Retrieve Results
+print(result$Summary)
+
+# 5. Close Connection
+cas.close(conn)
+```
